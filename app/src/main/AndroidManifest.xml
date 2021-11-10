@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.tapisdev.caritukang">
+    package="com.tapisdev.caritukang" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -17,11 +17,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CariTukang"
-        tools:replace="android:icon">
+        tools:replace="android:icon" >
+
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,9 +31,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"
-            android:exported="true">
-
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" >
         </activity>
     </application>
 
