@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:padding="20dp">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_logo"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"/>
+
+
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_marginTop="60dp"
+            style="@style/modifiedEditText"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:hint="Email"/>
+
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            style="@style/modifiedEditText"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/white"
+            android:hint="Password"
+            android:inputType="textPassword"/>
+
+
+
+        <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+            android:id="@+id/cirLoginButton"
+            style="@style/whiteButton"
+            app:spinning_bar_width="4dp"
+            app:spinning_bar_color="#FFF"
+            android:text="Login"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            app:spinning_bar_padding="6dp"
+            app:initialCornerAngle="27dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Hanya admin yang dapat login"
+            android:textColor="@color/white"/>
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
