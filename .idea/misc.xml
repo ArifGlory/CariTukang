@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable-v24/orange_button.xml" value="0.2703125" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/bg_gradient_home_shadow_white_left.xml" value="0.2703125" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/cursor.xml" value="0.2703125" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/edittext_border.xml" value="0.2703125" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.2703125" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2703125" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_home_pengguna.xml" value="0.17300724637681159" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/fragment_home.xml" value="0.17300724637681159" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Project/AndroidProjects/CariTukang/app/src/main/res/drawable-v24/button_background_white.xml" value="0.3828125" />
         <entry key="..\:/Project/AndroidProjects/CariTukang/app/src/main/res/drawable/bg_black_corner_10.xml" value="0.3828125" />
         <entry key="..\:/Project/AndroidProjects/CariTukang/app/src/main/res/drawable/button_background_blue.xml" value="0.3828125" />

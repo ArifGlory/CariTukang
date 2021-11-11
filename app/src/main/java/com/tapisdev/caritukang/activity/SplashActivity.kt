@@ -82,7 +82,7 @@ class SplashActivity : BaseActivity() {
 
 
         }else{
-            val i = Intent(this,MainActivity::class.java)
+            val i = Intent(this,HomePenggunaActivity::class.java)
             object : CountDownTimer(2500, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
 

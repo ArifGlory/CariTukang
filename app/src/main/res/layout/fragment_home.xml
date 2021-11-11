@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:background="@drawable/search_bg">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/app_name"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+
+                            <EditText
+                                android:id="@+id/edt_search"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/edittext_spin_border"
+                                android:gravity="center|start"
+                                android:hint="Cari puskesmas"
+                                android:inputType="textPersonName"
+                                android:padding="15dp"
+                                android:textColor="@color/gray_light"
+                                android:textColorHint="@color/gray_light"
+                                android:textCursorDrawable="@drawable/cursor_black"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btn_submit_search"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/search_property_button"
+                            android:elevation="10dp"
+                            android:paddingEnd="20dp"
+                            app:backgroundTint="@null"
+                            android:paddingStart="20dp"
+                            android:text="Pencarian"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/lyt_recent_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="0dp">
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="3dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="@color/colorAccent"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:id="@+id/txt_featured_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toEndOf="@+id/line3"
+                    android:layout_toRightOf="@+id/line3"
+                    android:text="Terbaru"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+                <Button
+                    android:id="@+id/btn_view_all"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/orange_button"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="More"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:backgroundTint="@null" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/lay_home_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="60dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_tukang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animation_view_puskes"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/water_loading" />
+
+                    <View
+                        android:id="@+id/home_view_2"
+                        android:layout_width="30dp"
+                        android:layout_height="240dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_gradient_home_shadow_white_left"
+                        android:layout_alignParentRight="true" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

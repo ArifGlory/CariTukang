@@ -18,7 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CariTukang"
         tools:replace="android:icon" >
-
+        <activity
+            android:name=".activity.HomePenggunaActivity"
+            android:label="Home"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar">
+        </activity>
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true"
