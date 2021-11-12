@@ -7,6 +7,7 @@ import android.os.CountDownTimer
 import android.util.Log
 import com.tapisdev.caritukang.MainActivity
 import com.tapisdev.caritukang.R
+import com.tapisdev.caritukang.activity.admin.HomeAdminActivity
 import com.tapisdev.caritukang.base.BaseActivity
 import com.tapisdev.caritukang.model.UserPreference
 import com.tapisdev.mysteam.model.UserModel
@@ -49,24 +50,24 @@ class SplashActivity : BaseActivity() {
                             Log.d("userpref"," jenis user : "+mUserPref.getJenisUser())
                             if (mUserPref.getJenisUser() != null){
                                 if (mUserPref.getJenisUser().equals("admin")){
-                                    /*val i = Intent(applicationContext, HomeAdminActivity::class.java)
-                                    startActivity(i)*/
+                                    val i = Intent(applicationContext, HomeAdminActivity::class.java)
+                                    startActivity(i)
                                 }/*else if(mUserPref.getJenisUser().equals("pengguna")){
                                     val i = Intent(applicationContext, HomePenggunaActivity::class.java)
                                     startActivity(i)
                                 }*/else{
-                                    val i = Intent(applicationContext, MainActivity::class.java)
+                                    val i = Intent(applicationContext, HomePenggunaActivity::class.java)
                                     startActivity(i)
                                 }
                             }else{
-                                val i = Intent(applicationContext, MainActivity::class.java)
+                                val i = Intent(applicationContext, HomePenggunaActivity::class.java)
                                 startActivity(i)
                             }
                         } else {
                             Log.d(TAG_dETAIL, "No such document")
                             auth.signOut()
                             logout()
-                            val i = Intent(applicationContext, MainActivity::class.java)
+                            val i = Intent(applicationContext, HomePenggunaActivity::class.java)
                             startActivity(i)
                         }
                     }
@@ -75,7 +76,7 @@ class SplashActivity : BaseActivity() {
                     Log.d(TAG_dETAIL,"err : "+task.exception)
                     auth.signOut()
                     logout()
-                    val i = Intent(applicationContext, MainActivity::class.java)
+                    val i = Intent(applicationContext, HomePenggunaActivity::class.java)
                     startActivity(i)
                 }
             }

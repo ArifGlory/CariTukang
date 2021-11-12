@@ -1,5 +1,6 @@
 package com.tapisdev.caritukang.activity
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.tapisdev.caritukang.MainActivity
 import com.tapisdev.caritukang.R
 import com.tapisdev.caritukang.base.BaseActivity
 import com.tapisdev.caritukang.fragment.HomeFragment
@@ -35,8 +37,9 @@ class HomePenggunaActivity : BaseActivity() {
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_info -> {
-
+            R.id.navigation_login -> {
+                val i = Intent(this,MainActivity::class.java)
+                startActivity(i)
             }
         }
         false

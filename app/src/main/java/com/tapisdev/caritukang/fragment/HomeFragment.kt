@@ -14,8 +14,11 @@ import com.google.firebase.firestore.Query
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
 import com.tapisdev.caritukang.R
+import com.tapisdev.caritukang.adapter.AdapterKategori
 import com.tapisdev.cateringtenda.base.BaseFragment
+import com.tapisdev.mysteam.model.Kategori
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -24,15 +27,14 @@ class HomeFragment : BaseFragment() {
 
 
     lateinit var animation_view_puskes : LottieAnimationView
-    lateinit var rv_tukang : RecyclerView
+    lateinit var rv_kategori : RecyclerView
     lateinit var btn_view_all : Button
     lateinit var btn_submit_search : Button
-    lateinit var btn_map : Button
     lateinit var edt_search : EditText
 
-    var TAG_GET = "getPuskes"
-   /* lateinit var adapter: AdapterPuskesmas
-    var listPuskesmas = ArrayList<Puskesmas>()*/
+    var TAG_GET = "getKategori"
+    lateinit var adapter: AdapterKategori
+    var listKategori = ArrayList<Kategori>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,15 +44,15 @@ class HomeFragment : BaseFragment() {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         animation_view_puskes = root.findViewById(R.id.animation_view_puskes)
-        rv_tukang = root.findViewById(R.id.rv_tukang)
+        rv_kategori = root.findViewById(R.id.rv_kategori)
         btn_view_all = root.findViewById(R.id.btn_view_all)
         btn_submit_search = root.findViewById(R.id.btn_submit_search)
         edt_search = root.findViewById(R.id.edt_search)
 
-        /*adapter = AdapterPuskesmas(listPuskesmas)
-        rv_tukang.setHasFixedSize(true)
-        rv_tukang.layoutManager = LinearLayoutManager(requireContext()) as RecyclerView.LayoutManager?
-        rv_tukang.adapter = adapter*/
+        adapter = AdapterKategori(listKategori)
+        rv_kategori.setHasFixedSize(true)
+        rv_kategori.layoutManager = LinearLayoutManager(requireContext()) as RecyclerView.LayoutManager?
+        rv_kategori.adapter = adapter
 
         btn_view_all.setOnClickListener {
             /*val i = Intent(requireActivity(), ListPuskesmasActivity::class.java)
@@ -67,26 +69,25 @@ class HomeFragment : BaseFragment() {
             }
         }
 
-        getDataPuskes()
+        getDataKategori()
         return root
     }
 
-    fun getDataPuskes(){
-        /*val sdf = SimpleDateFormat("yyyy-MM-dd")
-        val currentDate = sdf.format(Date())*/
-       /* puskesRef.orderBy("created_at",Query.Direction.DESCENDING)
-            .limit(5)
+    fun getDataKategori(){
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val currentDate = sdf.format(Date())
+        kategoriRef
             .get().addOnSuccessListener { result ->
-                listPuskesmas.clear()
+                listKategori.clear()
                 //Log.d(TAG_GET_Sparepart," datanya "+result.documents)
                 for (document in result){
                     //Log.d(TAG_GET_Sparepart, "Datanya : "+document.data)
-                    var puskes : Puskesmas = document.toObject(Puskesmas::class.java)
-                    puskes.id_puskesmas = document.id
-                    listPuskesmas.add(puskes)
+                    var kategori : Kategori = document.toObject(Kategori::class.java)
+                    kategori.id_kategori = document.id
+                    listKategori.add(kategori)
 
                 }
-                if (listPuskesmas.size == 0){
+                if (listKategori.size == 0){
                     animation_view_puskes.setAnimation(R.raw.empty_box)
                     animation_view_puskes.playAnimation()
                     animation_view_puskes.loop(false)
@@ -98,7 +99,7 @@ class HomeFragment : BaseFragment() {
             }.addOnFailureListener { exception ->
                 showErrorMessage("terjadi kesalahan : "+exception.message)
                 Log.d(TAG_GET,"err : "+exception.message)
-            }*/
+            }
     }
 
 
@@ -114,7 +115,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        getDataPuskes()
+        getDataKategori()
     }
 
 }
