@@ -186,14 +186,6 @@
                         app:lottie_loop="true"
                         app:lottie_rawRes="@raw/water_loading" />
 
-                    <View
-                        android:id="@+id/home_view_2"
-                        android:layout_width="30dp"
-                        android:layout_height="240dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/bg_gradient_home_shadow_white_left"
-                        android:layout_alignParentRight="true" />
 
                 </RelativeLayout>
             </LinearLayout>

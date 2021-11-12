@@ -79,4 +79,9 @@ class ListKategoriActivity : BaseActivity() {
             }
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        getDataKategori()
+    }
 }
