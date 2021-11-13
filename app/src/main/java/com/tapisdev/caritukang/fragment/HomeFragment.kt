@@ -76,7 +76,7 @@ class HomeFragment : BaseFragment() {
     fun getDataKategori(){
         val sdf = SimpleDateFormat("yyyy-MM-dd")
         val currentDate = sdf.format(Date())
-        kategoriRef
+        kategoriRef.whereEqualTo("active",1)
             .get().addOnSuccessListener { result ->
                 listKategori.clear()
                 //Log.d(TAG_GET_Sparepart," datanya "+result.documents)

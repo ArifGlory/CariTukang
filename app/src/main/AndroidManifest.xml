@@ -19,9 +19,13 @@
         android:theme="@style/Theme.CariTukang"
         tools:replace="android:icon">
         <activity
-            android:name=".activity.admin.AddKategoriActivity"
+            android:name=".activity.admin.EditKategoriActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:exported="true" />
+        <activity
+            android:name=".activity.admin.AddKategoriActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".activity.admin.ListKategoriActivity"
             android:exported="true"

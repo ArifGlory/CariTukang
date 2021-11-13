@@ -55,6 +55,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="orangeButton" parent="viewParent">
+        <item name="android:background">@drawable/button_background_orange</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="whiteButton" parent="viewParent">
         <item name="android:background">@drawable/button_background_white</item>
         <item name="android:textColor">@color/colorPrimary</item>

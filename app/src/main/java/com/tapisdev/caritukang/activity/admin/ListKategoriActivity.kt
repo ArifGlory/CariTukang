@@ -80,6 +80,10 @@ class ListKategoriActivity : BaseActivity() {
 
     }
 
+    fun refreshData(){
+        getDataKategori()
+    }
+
     override fun onResume() {
         super.onResume()
         getDataKategori()

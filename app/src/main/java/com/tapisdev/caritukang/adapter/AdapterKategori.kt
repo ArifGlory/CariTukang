@@ -24,7 +24,10 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.sdsmdg.tastytoast.TastyToast
 import com.tapisdev.caritukang.R
+import com.tapisdev.caritukang.activity.admin.EditKategoriActivity
+import com.tapisdev.caritukang.activity.admin.ListKategoriActivity
 import com.tapisdev.caritukang.model.UserPreference
 import com.tapisdev.mysteam.model.Kategori
 import com.tapisdev.mysteam.model.UserModel
@@ -48,8 +51,8 @@ class AdapterKategori(private val list:ArrayList<Kategori>) : RecyclerView.Adapt
     lateinit var mUserPref : UserPreference
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
     val myDB = FirebaseFirestore.getInstance()
-    val antrianRef = myDB.collection("antrian")
     lateinit var pDialogLoading : SweetAlertDialog
+    val kategoriRef = myDB.collection("kategori")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: Holder, position: Int) {
@@ -77,6 +80,58 @@ class AdapterKategori(private val list:ArrayList<Kategori>) : RecyclerView.Adapt
             /*val i = Intent(holder.view.lineKategori.context, DetailServiceActivity::class.java)
             i.putExtra("kategori",list.get(position) as Serializable)
             holder.view.lineKategori.context.startActivity(i)*/
+        }
+        holder.view.lineKategori.setOnLongClickListener {
+            Log.d("adapterIsi",""+list.get(position).toString())
+
+            if (mUserPref.getJenisUser().equals("admin")){
+                SweetAlertDialog(holder.view.lineKategori.context, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Edit / Hapus")
+                    .setContentText("Anda dapat mengubah / menghapus kategori ini")
+                    .setConfirmText("Ubah")
+                    .setConfirmClickListener { sDialog ->
+                        sDialog.dismissWithAnimation()
+
+                        val i = Intent(holder.view.lineKategori.context, EditKategoriActivity::class.java)
+                        i.putExtra("kategori",list.get(position) as Serializable)
+                        holder.view.lineKategori.context.startActivity(i)
+
+                    }
+                    .setCancelButton(
+                        "Hapus"
+                    ) {
+                            sDialog -> sDialog.dismissWithAnimation()
+                        pDialogLoading.show()
+
+                        kategoriRef.document(list?.get(position)?.id_kategori).update("active",0).addOnCompleteListener { task ->
+                           pDialogLoading.dismiss()
+                           if (task.isSuccessful){
+                               TastyToast.makeText(
+                                   holder.view.lineKategori.context,
+                                   "Data kategori dihapus",
+                                   TastyToast.LENGTH_SHORT,
+                                   TastyToast.SUCCESS
+                               )
+                               if (holder.view.lineKategori.context is ListKategoriActivity){
+                                   (holder.view.lineKategori.context as ListKategoriActivity).refreshData()
+                               }
+                           }else{
+                               TastyToast.makeText(
+                                   holder.view.lineKategori.context,
+                                   "Terjadi kesalahan, coba lagi nanti",
+                                   TastyToast.LENGTH_SHORT,
+                                   TastyToast.ERROR
+                               )
+                               Log.d("ubahKategori","err : "+task.exception)
+                           }
+                       }
+                    }
+                    .show()
+            }
+
+
+
+            true
         }
 
 

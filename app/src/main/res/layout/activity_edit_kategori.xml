@@ -22,14 +22,14 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="35dp"
             android:fontFamily="@font/mark_web_w04_black"
-            android:text="Tambah Kategori"
+            android:text="Edit Kategori"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
             tools:ignore="MissingPrefix" />
 
         <ImageView
-            android:id="@+id/ivBackCreateKategori"
+            android:id="@+id/ivBackEditKategori"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
@@ -62,7 +62,7 @@
 
 
                 <EditText
-                    android:id="@+id/edNamaKategori"
+                    android:id="@+id/edNamaKategoriUpdate"
                     android:layout_margin="10dp"
                     style="@style/modifiedEditText"
                     android:textColor="@color/black"
@@ -89,7 +89,7 @@
                         android:textSize="14sp" />
 
                     <RelativeLayout
-                        android:id="@+id/rlImage"
+                        android:id="@+id/rlImageUpdate"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
@@ -97,12 +97,14 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageKategori"
+                            android:id="@+id/imageKategoriUpdate"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:layout_margin="5dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="5dp"
                             android:contentDescription="@string/app_name"
                             android:scaleType="fitXY" />
 
@@ -118,7 +120,7 @@
                             android:text="Pilih Foto"
                             android:textColor="@color/add_properties_text"
                             android:textSize="14sp"
-                            android:visibility="visible" />
+                            android:visibility="invisible" />
 
                     </RelativeLayout>
 
@@ -126,11 +128,11 @@
                 </LinearLayout>
 
                 <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                    android:id="@+id/btnSimpanKategori"
+                    android:id="@+id/btnUpdateKategori"
                     style="@style/orangeButton"
                     app:spinning_bar_width="4dp"
                     app:spinning_bar_color="#FFF"
-                    android:text="Simpan"
+                    android:text="Update"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/loginViewsMargin"
                     app:initialCornerAngle="27dp"
