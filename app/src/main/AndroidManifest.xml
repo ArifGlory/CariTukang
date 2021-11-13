@@ -19,9 +19,20 @@
         android:theme="@style/Theme.CariTukang"
         tools:replace="android:icon">
         <activity
-            android:name=".activity.admin.EditKategoriActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"
+            android:name=".activity.admin.SelectLokasiActivity"
             android:exported="true" />
+        <activity
+            android:name=".activity.admin.AddTukangActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity
+            android:name=".activity.admin.ListTukangActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity
+            android:name=".activity.admin.EditKategoriActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".activity.admin.AddKategoriActivity"
             android:exported="true"

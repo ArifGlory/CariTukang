@@ -21,6 +21,10 @@ class HomeAdminActivity : BaseActivity() {
             startActivity(Intent(this, ListKategoriActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.stay)
         }
+        lineTukangAdmin.setOnClickListener {
+            startActivity(Intent(this, ListTukangActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.stay)
+        }
 
     }
 }
