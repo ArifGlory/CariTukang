@@ -1,0 +1,29 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/spacing_middle"
+    android:paddingRight="@dimen/spacing_middle">
+
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_centerVertical="true"
+        android:textColor="@color/grey_800"
+        android:textSize="13sp"
+        tools:text="Kategori"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:tint="@color/dark_gary"
+        android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:layout_alignParentRight="true"
+        tools:ignore="UseAppTint" />
+
+
+</RelativeLayout>

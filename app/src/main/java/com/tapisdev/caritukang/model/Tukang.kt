@@ -14,5 +14,8 @@ data class Tukang(
     var lat : String = "",
     var lon : String = "",
     var id_kategori : String = "",
-    var id_tukang : String = ""
+    var id_tukang : String = "",
+    var rating : Int = 0,
+    var jml_order : Int = 0,
+    var active : Int = 0
 ) : Parcelable,java.io.Serializable

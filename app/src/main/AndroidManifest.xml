@@ -23,9 +23,17 @@
         android:theme="@style/Theme.CariTukang"
         tools:replace="android:icon">
         <activity
-            android:name=".activity.MaintenanceActivity"
+            android:name=".activity.RegisterTukangActivity"
+            android:label="Pendaftaran Tukang"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ShowTukangActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:exported="true" />
+        <activity
+            android:name=".activity.MaintenanceActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

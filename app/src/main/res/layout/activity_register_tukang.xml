@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:focusableInTouchMode="true"
+    android:layout_gravity="center">
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_below="@+id/rlToolBar">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/whiteTextColor"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Kategori Tukang"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+
+                        <Spinner
+                            android:id="@+id/spKategoriReg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/blue_outline"
+                            android:padding="5dp"
+                            android:popupBackground="@color/white"
+                            tools:listitem="@layout/row_spinner_kategori"></Spinner>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Nama Tukang"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/edNamaTukangReg"
+                            android:layout_margin="10dp"
+                            style="@style/modifiedEditText"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/add_properties_text"
+                            android:inputType="textPersonName"
+                            android:maxLines="1"
+                            android:hint="Nama"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Telepon Tukang"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/edPhoneTukangReg"
+                            android:layout_margin="10dp"
+                            style="@style/modifiedEditText"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/add_properties_text"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:hint="0821xxxx"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Alamat Tukang"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/edAlamatTukangReg"
+                            android:layout_margin="10dp"
+                            style="@style/modifiedEditText"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/add_properties_text"
+                            android:inputType="textMultiLine"
+                            android:maxLines="7"
+                            android:hint="jalan - jalan "/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Jam Kerja Tukang"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/edJamKerjaReg"
+                            android:layout_margin="10dp"
+                            style="@style/modifiedEditText"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/add_properties_text"
+                            android:inputType="textMultiLine"
+                            android:maxLines="3"
+                            android:hint="Senin - Jumat pukul..."/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lay_purpose_fur"
+                        android:layout_margin="2dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lokasi Tukang"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/edittext_border"
+                            android:orientation="vertical">
+
+
+                            <Button
+                                android:id="@+id/btnLokasiReg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/button_background_red"
+                                android:text="Pilih Lokasi" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/lay_purpose_feature_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/lay_purpose_fur"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Foto Tukang"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <RelativeLayout
+                            android:id="@+id/rlImageTukangReg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/edittext_border"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageTukangReg"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="5dp"
+                                android:contentDescription="@string/app_name"
+                                android:scaleType="fitXY" />
+
+                            <TextView
+                                android:id="@+id/textSelectImageTukangReg"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:drawableStart="@drawable/add_image"
+                                android:drawableLeft="@drawable/add_image"
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:text="Pilih Foto"
+                                android:textColor="@color/add_properties_text"
+                                android:textSize="14sp"
+                                android:visibility="visible" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+                        android:id="@+id/btnSimpanTukangReg"
+                        style="@style/orangeButton"
+                        app:spinning_bar_width="4dp"
+                        app:spinning_bar_color="#FFF"
+                        android:text="Simpan"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/loginViewsMargin"
+                        app:initialCornerAngle="27dp"
+                        app:spinning_bar_padding="6dp"/>
+
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
