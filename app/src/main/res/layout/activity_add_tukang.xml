@@ -163,7 +163,7 @@
                         android:textColorHint="@color/add_properties_text"
                         android:inputType="textMultiLine"
                         android:maxLines="3"
-                        android:hint="Senin - Jumat ..."/>
+                        android:hint="Senin - Jumat pukul..."/>
 
                 </LinearLayout>
 
@@ -193,9 +193,9 @@
                             android:id="@+id/btnLokasi"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Pilih Lokasi"
+                            android:layout_marginLeft="10dp"
                             android:background="@drawable/button_background_red"
-                            android:layout_marginLeft="10dp" />
+                            android:text="Pilih Lokasi" />
 
                     </RelativeLayout>
 
@@ -223,7 +223,7 @@
                         android:textSize="14sp" />
 
                     <RelativeLayout
-                        android:id="@+id/rlImage"
+                        android:id="@+id/rlImageTukang"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
@@ -231,7 +231,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageKategori"
+                            android:id="@+id/imageTukang"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerHorizontal="true"
@@ -241,7 +241,7 @@
                             android:scaleType="fitXY" />
 
                         <TextView
-                            android:id="@+id/textSelectImage"
+                            android:id="@+id/textSelectImageTukang"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -260,7 +260,7 @@
                 </LinearLayout>
 
                 <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                    android:id="@+id/btnSimpanKategori"
+                    android:id="@+id/btnSimpanTukang"
                     style="@style/orangeButton"
                     app:spinning_bar_width="4dp"
                     app:spinning_bar_color="#FFF"

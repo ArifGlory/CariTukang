@@ -38,6 +38,9 @@ android {
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/NOTICE'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {

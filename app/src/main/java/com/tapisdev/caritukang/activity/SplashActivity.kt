@@ -28,9 +28,9 @@ class SplashActivity : BaseActivity() {
                     if (mode != null) {
                         if (mode.equals("1")){
                             auth.signOut()
-                            /*val i = Intent(applicationContext,MaintenanceActivity::class.java)
+                            val i = Intent(applicationContext,MaintenanceActivity::class.java)
                             startActivity(i)
-                            finish()*/
+                            finish()
                         }
                     }
                 }

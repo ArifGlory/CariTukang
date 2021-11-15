@@ -32,7 +32,7 @@
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/ivFotoTukang"
-                    android:layout_width="80dp"
+                    android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_placeholder"

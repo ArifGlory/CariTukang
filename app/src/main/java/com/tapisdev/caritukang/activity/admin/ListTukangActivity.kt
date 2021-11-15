@@ -1,5 +1,6 @@
 package com.tapisdev.caritukang.activity.admin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -34,7 +35,8 @@ class ListTukangActivity : BaseActivity() {
 
 
         btnCreateTukang.setOnClickListener {
-
+            val i = Intent(this,AddTukangActivity::class.java)
+            startActivity(i)
         }
         ivBackTukang.setOnClickListener {
             onBackPressed()
