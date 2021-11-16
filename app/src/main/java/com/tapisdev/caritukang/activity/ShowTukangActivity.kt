@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.sdsmdg.tastytoast.TastyToast
 import com.tapisdev.caritukang.R
 import com.tapisdev.caritukang.activity.admin.EditKategoriActivity
+import com.tapisdev.caritukang.activity.admin.EditTukangActivity
 import com.tapisdev.caritukang.activity.admin.ListKategoriActivity
 import com.tapisdev.caritukang.base.BaseActivity
 import com.tapisdev.caritukang.model.UserPreference
@@ -49,7 +50,9 @@ class ShowTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
             requestPermissionCall()
         }
         btnEditTukang.setOnClickListener {
-
+            val i = Intent(this,EditTukangActivity::class.java)
+            i.putExtra("tukang",tukang as Serializable)
+            startActivity(i)
         }
         btnHapusTukang.setOnClickListener {
             SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
