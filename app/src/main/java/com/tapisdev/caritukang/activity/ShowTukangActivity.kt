@@ -5,15 +5,21 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
+import com.sdsmdg.tastytoast.TastyToast
 import com.tapisdev.caritukang.R
+import com.tapisdev.caritukang.activity.admin.EditKategoriActivity
+import com.tapisdev.caritukang.activity.admin.ListKategoriActivity
 import com.tapisdev.caritukang.base.BaseActivity
 import com.tapisdev.caritukang.model.UserPreference
 import com.tapisdev.caritukang.util.PermissionHelper
 import com.tapisdev.mysteam.model.Kategori
 import com.tapisdev.mysteam.model.Tukang
 import kotlinx.android.synthetic.main.activity_show_tukang.*
+import kotlinx.android.synthetic.main.row_kategori.view.*
 import java.io.Serializable
 import java.util.ArrayList
 
@@ -41,6 +47,47 @@ class ShowTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         }
         btnHubungi.setOnClickListener {
             requestPermissionCall()
+        }
+        btnEditTukang.setOnClickListener {
+
+        }
+        btnHapusTukang.setOnClickListener {
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Hapus Tukang ini ?")
+                .setContentText("Data yang sudah dihapus tidak bisa dikembalikan")
+                .setConfirmText("Ya")
+                .setConfirmClickListener { sDialog ->
+                    sDialog.dismissWithAnimation()
+                    showLoading(this)
+
+                    tukangRef.document(tukang.id_tukang).delete().addOnCompleteListener { task ->
+                        dismissLoading()
+                        if (task.isSuccessful){
+                            TastyToast.makeText(
+                                this,
+                                "Data tukang dihapus",
+                                TastyToast.LENGTH_SHORT,
+                                TastyToast.SUCCESS
+                            )
+                            onBackPressed()
+
+                        }else{
+                            TastyToast.makeText(
+                                this,
+                                "Terjadi kesalahan, coba lagi nanti",
+                                TastyToast.LENGTH_SHORT,
+                                TastyToast.ERROR
+                            )
+                            Log.d("hapusTukang","err : "+task.exception)
+                        }
+                    }
+                }
+                .setCancelButton(
+                    "Tidak"
+                ) {
+                        sDialog -> sDialog.dismissWithAnimation()
+                }
+                .show()
         }
 
         updateUI()

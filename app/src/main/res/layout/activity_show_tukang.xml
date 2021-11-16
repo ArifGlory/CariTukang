@@ -175,7 +175,7 @@
                                 android:layout_weight="2">
 
                                 <Button
-                                    android:id="@+id/btnEditPuskesmas"
+                                    android:id="@+id/btnEditTukang"
                                     android:layout_marginHorizontal="10dp"
                                     android:visibility="visible"
                                     style="?android:attr/buttonBarButtonStyle"
@@ -195,7 +195,7 @@
                                     android:textSize="11sp" />
 
                                 <Button
-                                    android:id="@+id/btnHapusPuskesmas"
+                                    android:id="@+id/btnHapusTukang"
                                     android:visibility="visible"
                                     android:layout_marginHorizontal="10dp"
                                     android:layout_weight="1"

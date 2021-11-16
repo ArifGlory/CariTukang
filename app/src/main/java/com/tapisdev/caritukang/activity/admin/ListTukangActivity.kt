@@ -62,6 +62,8 @@ class ListTukangActivity : BaseActivity() {
     }
 
     fun getDataTukangAktif(){
+        switchTukang.setText("List Tukang Aktif")
+        switchTukang.isChecked = true
 
         tukangRef.whereEqualTo("active",1)
             .get().addOnSuccessListener { result ->
