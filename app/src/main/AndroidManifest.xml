@@ -53,7 +53,7 @@
         <activity
             android:name=".activity.admin.AddTukangActivity"
             android:exported="true"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+            android:label="Tambah Tukang" />
         <activity
             android:name=".activity.admin.ListTukangActivity"
             android:exported="true"
