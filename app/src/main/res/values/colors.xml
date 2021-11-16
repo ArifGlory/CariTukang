@@ -19,6 +19,7 @@
     <color name="about_title">#353535</color>
     <color name="about_text">#8b8b8b</color>
     <color name="forgot_bg">#FFFFFF</color>
+    <color name="line">#EBEBEB</color>
 
     <color name="darkTextColor">#020000</color>
     <color name="colorAccent2">#01bcd5</color>

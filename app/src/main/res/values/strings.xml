@@ -3,4 +3,5 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_select_maps">SelectMapsActivity</string>
     <string name="subtitle_daftar">Anda dapat mencalonkan diri sebagai tukang di aplikasi ini, Namun butuh persetujuan admin agar aktif</string>
+    <string name="title_activity_lihat_lokasi">LihatLokasiActivity</string>
 </resources>

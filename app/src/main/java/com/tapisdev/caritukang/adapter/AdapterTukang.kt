@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sdsmdg.tastytoast.TastyToast
 import com.tapisdev.caritukang.R
+import com.tapisdev.caritukang.activity.ShowTukangActivity
 import com.tapisdev.caritukang.activity.admin.EditKategoriActivity
 import com.tapisdev.caritukang.activity.admin.ListKategoriActivity
 import com.tapisdev.caritukang.activity.admin.ListTukangActivity
@@ -81,9 +82,9 @@ class AdapterTukang(private val list:ArrayList<Tukang>) : RecyclerView.Adapter<A
         }
 
         holder.view.lineTukang.setOnClickListener {
-            /*val i = Intent(holder.view.lineTukang.context, DetailServiceActivity::class.java)
-            i.putExtra("kategori",list.get(position) as Serializable)
-            holder.view.lineTukang.context.startActivity(i)*/
+            val i = Intent(holder.view.lineTukang.context, ShowTukangActivity::class.java)
+            i.putExtra("tukang",list.get(position) as Serializable)
+            holder.view.lineTukang.context.startActivity(i)
         }
         holder.view.lineTukang.setOnLongClickListener {
             Log.d("adapterIsi",""+list.get(position).toString())

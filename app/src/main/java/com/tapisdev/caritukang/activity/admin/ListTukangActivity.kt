@@ -41,9 +41,18 @@ class ListTukangActivity : BaseActivity() {
         ivBackTukang.setOnClickListener {
             onBackPressed()
         }
+        switchTukang.setOnCheckedChangeListener { compoundButton, check ->
+            if (check){
+                compoundButton.setText("List Tukang Aktif")
+                getDataTukangAktif()
+            }else{
+                compoundButton.setText("List Tukang Belum Aktif")
+                getDataTukangNonAktif()
+            }
+        }
 
         updateUI()
-        getDataTukang()
+        getDataTukangAktif()
     }
 
     fun updateUI(){
@@ -52,9 +61,39 @@ class ListTukangActivity : BaseActivity() {
         }
     }
 
-    fun getDataTukang(){
+    fun getDataTukangAktif(){
 
-        tukangRef
+        tukangRef.whereEqualTo("active",1)
+            .get().addOnSuccessListener { result ->
+                listTukang.clear()
+                //Log.d(TAG_GET_Sparepart," datanya "+result.documents)
+                for (document in result){
+                    //Log.d(TAG_GET_Sparepart, "Datanya : "+document.data)
+                    var tukang : Tukang = document.toObject(Tukang::class.java)
+                    tukang.id_tukang = document.id
+
+                    listTukang.add(tukang)
+
+                }
+                if (listTukang.size == 0){
+                    animation_view_tukang.setAnimation(R.raw.empty_box)
+                    animation_view_tukang.playAnimation()
+                    animation_view_tukang.loop(false)
+                }else{
+                    animation_view_tukang.visibility = View.INVISIBLE
+                }
+                adapter.notifyDataSetChanged()
+
+            }.addOnFailureListener { exception ->
+                showErrorMessage("terjadi kesalahan : "+exception.message)
+                Log.d(TAG_GET_TUKANG,"err : "+exception.message)
+            }
+
+    }
+
+    fun getDataTukangNonAktif(){
+
+        tukangRef.whereEqualTo("active",0)
             .get().addOnSuccessListener { result ->
                 listTukang.clear()
                 //Log.d(TAG_GET_Sparepart," datanya "+result.documents)
@@ -83,11 +122,11 @@ class ListTukangActivity : BaseActivity() {
     }
 
     fun refreshData(){
-        getDataTukang()
+        getDataTukangAktif()
     }
 
     override fun onResume() {
         super.onResume()
-        getDataTukang()
+        getDataTukangAktif()
     }
 }

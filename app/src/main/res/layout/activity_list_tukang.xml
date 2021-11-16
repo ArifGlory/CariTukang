@@ -62,8 +62,19 @@
                 android:layout_below="@+id/rlToolBar"
                 android:layout_height="wrap_content">
 
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="List Tukang Aktif"
+                    android:checked="true"
+                    android:textColor="@color/about_title"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/switchTukang"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvListTukang"
+                    android:layout_below="@+id/switchTukang"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
