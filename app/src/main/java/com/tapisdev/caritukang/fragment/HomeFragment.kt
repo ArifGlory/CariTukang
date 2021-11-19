@@ -14,6 +14,7 @@ import com.google.firebase.firestore.Query
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
 import com.tapisdev.caritukang.R
+import com.tapisdev.caritukang.activity.ResultActivity
 import com.tapisdev.caritukang.adapter.AdapterKategori
 import com.tapisdev.cateringtenda.base.BaseFragment
 import com.tapisdev.mysteam.model.Kategori
@@ -63,9 +64,10 @@ class HomeFragment : BaseFragment() {
             if (keyword.equals("") || keyword.length == 0){
                 showErrorMessage("Anda belum menuliskan kata kunci pencarian")
             }else{
-               /* val i = Intent(requireActivity(), ListPuskesmasActivity::class.java)
+                val i = Intent(requireActivity(), ResultActivity::class.java)
+                i.putExtra("type","search")
                 i.putExtra("keyword",keyword)
-                startActivity(i)*/
+                startActivity(i)
             }
         }
 

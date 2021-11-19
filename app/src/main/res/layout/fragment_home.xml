@@ -71,7 +71,7 @@
                                 android:layout_marginTop="10dp"
                                 android:background="@drawable/edittext_spin_border"
                                 android:gravity="center|start"
-                                android:hint="Cari berdasarkan nama pekerjaan"
+                                android:hint="Cari berdasarkan nama atau pekerjaan"
                                 android:inputType="textPersonName"
                                 android:padding="15dp"
                                 android:textColor="@color/gray_light"

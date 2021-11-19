@@ -1,7 +1,9 @@
 package com.tapisdev.caritukang.activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -18,6 +20,8 @@ import com.tapisdev.caritukang.model.UserPreference
 import kotlinx.android.synthetic.main.activity_home_pengguna.*
 
 class HomePenggunaActivity : BaseActivity() {
+
+    var listener: DialogInterface.OnClickListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +57,27 @@ class HomePenggunaActivity : BaseActivity() {
             .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
             .replace(R.id.content, fragment, fragment.javaClass.getSimpleName())
             .commit()
+    }
+
+    override fun onBackPressed() {
+        val builder =
+            AlertDialog.Builder(this)
+        builder.setMessage("Apakan anda ingin keluar dari aplikasi ? ")
+        builder.setCancelable(false)
+
+        listener = DialogInterface.OnClickListener { dialog, which ->
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                finishAffinity()
+                System.exit(0)
+            }
+            if (which == DialogInterface.BUTTON_NEGATIVE) {
+                dialog.cancel()
+            }
+        }
+        builder.setPositiveButton("Ya", listener)
+        builder.setNegativeButton("Tidak", listener)
+        builder.show()
+
     }
 
 }

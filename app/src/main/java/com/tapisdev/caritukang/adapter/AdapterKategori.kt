@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sdsmdg.tastytoast.TastyToast
 import com.tapisdev.caritukang.R
+import com.tapisdev.caritukang.activity.ResultActivity
 import com.tapisdev.caritukang.activity.admin.EditKategoriActivity
 import com.tapisdev.caritukang.activity.admin.ListKategoriActivity
 import com.tapisdev.caritukang.model.UserPreference
@@ -77,9 +78,12 @@ class AdapterKategori(private val list:ArrayList<Kategori>) : RecyclerView.Adapt
         }
 
         holder.view.lineKategori.setOnClickListener {
-            /*val i = Intent(holder.view.lineKategori.context, DetailServiceActivity::class.java)
-            i.putExtra("kategori",list.get(position) as Serializable)
-            holder.view.lineKategori.context.startActivity(i)*/
+            if (!mUserPref.getJenisUser().equals("admin")){
+                val i = Intent(holder.view.lineKategori.context, ResultActivity::class.java)
+                i.putExtra("type","kategori")
+                i.putExtra("id_kategori",list?.get(position)?.id_kategori)
+                holder.view.lineKategori.context.startActivity(i)
+            }
         }
         holder.view.lineKategori.setOnLongClickListener {
             Log.d("adapterIsi",""+list.get(position).toString())

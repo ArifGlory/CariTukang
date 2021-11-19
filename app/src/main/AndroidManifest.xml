@@ -24,9 +24,13 @@
         android:theme="@style/Theme.CariTukang"
         tools:replace="android:icon">
         <activity
-            android:name=".activity.admin.EditTukangActivity"
-            android:label="Ubah Data Tukang"
+            android:name=".activity.ResultActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:exported="true" />
+        <activity
+            android:name=".activity.admin.EditTukangActivity"
+            android:exported="true"
+            android:label="Ubah Data Tukang" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

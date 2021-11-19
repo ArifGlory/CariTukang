@@ -51,6 +51,7 @@ class ProfilActivity : BaseActivity(),PermissionHelper.PermissionListener {
 
             startActivity(Intent(this, HomePenggunaActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.stay)
+            finish()
         }
         ivGallery.setOnClickListener {
             launchGallery()
