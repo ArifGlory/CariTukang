@@ -57,6 +57,7 @@ class ResultActivity : BaseActivity() {
         Log.d("resAct","keyword "+keyword)
 
         tukangRef.whereEqualTo("active",1)
+            .orderBy("jml_order",Query.Direction.DESCENDING)
             .get().addOnSuccessListener { result ->
                 listTukang.clear()
                 //Log.d(TAG_GET_Sparepart," datanya "+result.documents)
@@ -96,6 +97,7 @@ class ResultActivity : BaseActivity() {
         Log.d("resAct","id kategori "+id_kategori)
 
         tukangRef.whereEqualTo("active",1)
+            .orderBy("jml_order",Query.Direction.DESCENDING)
             .get().addOnSuccessListener { result ->
                 listTukang.clear()
                 //Log.d(TAG_GET_Sparepart," datanya "+result.documents)

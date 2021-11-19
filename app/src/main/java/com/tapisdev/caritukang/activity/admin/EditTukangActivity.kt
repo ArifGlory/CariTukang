@@ -128,6 +128,7 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         var getPhone = edPhoneTukang.text.toString()
         var getAlamat = edAlamatTukang.text.toString()
         var getjamkerja = edJamKerja.text.toString()
+        var getJmlOrder = edJmlOrder.text.toString()
         var status = tukang.active
         if (switchTukang.isChecked){
             status = 1
@@ -144,6 +145,8 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
             showErrorMessage("alamat Belum diisi")
         }else if (getjamkerja.equals("") || getjamkerja.length == 0){
             showErrorMessage("Jam Kerja Belum diisi")
+        }else if (getJmlOrder.equals("") || getJmlOrder.length == 0){
+            showErrorMessage("Jumlah order belum diisi")
         }else if (lat == 0.0){
             showErrorMessage("Lokasi belum dpilih")
         }
@@ -155,6 +158,7 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
             tukang.lat = lat.toString()
             tukang.lon = lon.toString()
             tukang.id_kategori = selectedIdKategori
+            tukang.jml_order = getJmlOrder.toInt()
             tukang.active = status
 
             updateDataOnly()
@@ -168,6 +172,7 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
             tukang.lat = lat.toString()
             tukang.lon = lon.toString()
             tukang.id_kategori = selectedIdKategori
+            tukang.jml_order = getJmlOrder.toInt()
             tukang.active = status
             uploadFotoAndUpdate()
         }
@@ -183,6 +188,7 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         tukangRef.document(tukang.id_tukang).update("lat",tukang.lat)
         tukangRef.document(tukang.id_tukang).update("lon",tukang.lon)
         tukangRef.document(tukang.id_tukang).update("id_kategori",tukang.id_kategori)
+        tukangRef.document(tukang.id_tukang).update("jml_order",tukang.jml_order)
         tukangRef.document(tukang.id_tukang).update("active",tukang.active).addOnCompleteListener { task ->
             dismissLoading()
             if (task.isSuccessful){
@@ -236,6 +242,7 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
                         tukangRef.document(tukang.id_tukang).update("lat",tukang.lat)
                         tukangRef.document(tukang.id_tukang).update("lon",tukang.lon)
                         tukangRef.document(tukang.id_tukang).update("id_kategori",tukang.id_kategori)
+                        tukangRef.document(tukang.id_tukang).update("jml_order",tukang.jml_order)
                         tukangRef.document(tukang.id_tukang).update("active",tukang.active).addOnCompleteListener { task ->
                             dismissLoading()
                             if (task.isSuccessful){
@@ -269,6 +276,7 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         edPhoneTukang.setText(tukang.phone_tukang)
         edAlamatTukang.setText(tukang.alamat_tukang)
         edJamKerja.setText(tukang.jam_kerja)
+        edJmlOrder.setText(""+tukang.jml_order)
 
         Glide.with(this)
             .load(tukang.foto_tukang)
