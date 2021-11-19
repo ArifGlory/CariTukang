@@ -46,7 +46,6 @@ class HomeFragment : BaseFragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         animation_view_puskes = root.findViewById(R.id.animation_view_puskes)
         rv_kategori = root.findViewById(R.id.rv_kategori)
-        btn_view_all = root.findViewById(R.id.btn_view_all)
         btn_submit_search = root.findViewById(R.id.btn_submit_search)
         edt_search = root.findViewById(R.id.edt_search)
 
@@ -55,10 +54,6 @@ class HomeFragment : BaseFragment() {
         rv_kategori.layoutManager = LinearLayoutManager(requireContext()) as RecyclerView.LayoutManager?
         rv_kategori.adapter = adapter
 
-        btn_view_all.setOnClickListener {
-            /*val i = Intent(requireActivity(), ListPuskesmasActivity::class.java)
-            startActivity(i)*/
-        }
         btn_submit_search.setOnClickListener {
             var keyword = edt_search.text.toString()
             if (keyword.equals("") || keyword.length == 0){

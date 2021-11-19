@@ -16,6 +16,7 @@ import com.tapisdev.caritukang.R
 import com.tapisdev.caritukang.base.BaseActivity
 import com.tapisdev.caritukang.fragment.AkunFragment
 import com.tapisdev.caritukang.fragment.HomeFragment
+import com.tapisdev.caritukang.fragment.InfoFragment
 import com.tapisdev.caritukang.model.UserPreference
 import kotlinx.android.synthetic.main.activity_home_pengguna.*
 
@@ -44,6 +45,11 @@ class HomePenggunaActivity : BaseActivity() {
             }
             R.id.navigation_login -> {
                 val fragment = AkunFragment.newInstance()
+                addFragment(fragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_info -> {
+                val fragment = InfoFragment.newInstance()
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }

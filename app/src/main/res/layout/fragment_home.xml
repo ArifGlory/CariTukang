@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="0dp">
+                android:layout_marginTop="5dp">
 
                 <View
                     android:id="@+id/line3"
@@ -128,29 +128,12 @@
                     android:layout_marginLeft="8dp"
                     android:layout_toEndOf="@+id/line3"
                     android:layout_toRightOf="@+id/line3"
-                    android:text="Terbaru"
+                    android:text="Kategori"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
 
-                <Button
-                    android:id="@+id/btn_view_all"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
-                    android:background="@drawable/orange_button"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="More"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
 
 
             </RelativeLayout>

@@ -4,4 +4,5 @@
     <string name="title_activity_select_maps">SelectMapsActivity</string>
     <string name="subtitle_daftar">Anda dapat mencalonkan diri sebagai tukang di aplikasi ini, Namun butuh persetujuan admin agar aktif</string>
     <string name="title_activity_lihat_lokasi">LihatLokasiActivity</string>
+    <string name="description_about">Aplikasi ini dapat digunakan untuk media membantu masyarakat dalam pemesan atau pencarian jasa tukang, mendapatkan tukang yang terpercaya dan berkualitas sesuai bidangnya dalam sisi tukang juga dapat digunakan untuk media promosi dan lebih efektif untuk meningkatkan penghasilan.</string>
 </resources>
