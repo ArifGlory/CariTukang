@@ -22,14 +22,16 @@ import com.tapisdev.mysteam.model.Tukang
 import kotlinx.android.synthetic.main.activity_show_tukang.*
 import kotlinx.android.synthetic.main.row_kategori.view.*
 import java.io.Serializable
-import java.util.ArrayList
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ShowTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
 
     lateinit var i : Intent
     lateinit var tukang : Tukang
     lateinit var  permissionHelper : PermissionHelper
-
+    var listKategori = ArrayList<Kategori>()
+    var TAG_GET = "getKategori"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,6 +96,7 @@ class ShowTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         }
 
         updateUI()
+        getDataKategori()
     }
 
     private fun requestPermissionCall() {
@@ -127,5 +130,30 @@ class ShowTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         val intent = Intent(Intent.ACTION_CALL)
         intent.data = Uri.parse("tel:$number")
         startActivity(intent)
+    }
+
+    fun getDataKategori(){
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val currentDate = sdf.format(Date())
+        kategoriRef
+            .get().addOnSuccessListener { result ->
+                listKategori.clear()
+                //Log.d(TAG_GET_Sparepart," datanya "+result.documents)
+                for (document in result){
+                    //Log.d(TAG_GET_Sparepart, "Datanya : "+document.data)
+                    var kategori : Kategori = document.toObject(Kategori::class.java)
+                    kategori.id_kategori = document.id
+
+                    if (kategori.id_kategori.equals(tukang.id_kategori)){
+                        tvKategori.setText(""+kategori.nama_kategori)
+                    }
+                    listKategori.add(kategori)
+                }
+
+
+            }.addOnFailureListener { exception ->
+                showErrorMessage("terjadi kesalahan : "+exception.message)
+                Log.d(TAG_GET,"err : "+exception.message)
+            }
     }
 }

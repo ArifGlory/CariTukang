@@ -81,8 +81,10 @@ class LihatLokasiActivity : BaseActivity(), OnMapReadyCallback ,PermissionHelper
 
         // Add a marker in Sydney and move the camera
         val lokasiTukang = LatLng(tukang.lat.toDouble(), tukang.lon.toDouble())
+        val zoomLevel = 16.0f //This goes up to 21
+
         mMap.addMarker(MarkerOptions().position(lokasiTukang).title("Lokasi Tukang"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(lokasiTukang))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lokasiTukang,zoomLevel))
     }
 
     private fun permissionLocation() {
