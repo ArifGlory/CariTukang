@@ -2,6 +2,8 @@ package com.tapisdev.caritukang.base
 
 import android.content.Context
 import android.graphics.Color
+import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +28,7 @@ open class BaseActivity : AppCompatActivity() {
     val settingsRef = myDB.collection("settings")
     val kategoriRef = myDB.collection("kategori")
     val tukangRef = myDB.collection("tukang")
+    val ratingRef = myDB.collection("rating")
 
     override fun setContentView(view: View?) {
         super.setContentView(view)
@@ -51,6 +54,16 @@ open class BaseActivity : AppCompatActivity() {
 
     fun dismissLoading(){
         pDialogLoading.dismiss()
+    }
+
+    fun getDeviceID(): String? {
+        val android_id = Settings.Secure.getString(
+            applicationContext.contentResolver,
+            Settings.Secure.ANDROID_ID
+        )
+
+        Log.d("cek","  = "+ android_id)
+        return android_id
     }
 
     fun showErrorMessage(message : String){

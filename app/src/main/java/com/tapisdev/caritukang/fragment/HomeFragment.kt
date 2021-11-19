@@ -22,6 +22,11 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import android.provider.Settings.Secure
+import androidx.core.content.ContextCompat.getSystemService
+
+import android.telephony.TelephonyManager
+import androidx.core.content.ContextCompat
 
 
 class HomeFragment : BaseFragment() {
@@ -69,6 +74,8 @@ class HomeFragment : BaseFragment() {
         getDataKategori()
         return root
     }
+
+
 
     fun getDataKategori(){
         val sdf = SimpleDateFormat("yyyy-MM-dd")
