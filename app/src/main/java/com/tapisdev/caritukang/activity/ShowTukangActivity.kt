@@ -124,6 +124,9 @@ class ShowTukangActivity : BaseActivity(),PermissionHelper.PermissionListener,Ra
         tvNamaTukang.setText(tukang.nama_tukang)
         tvAlamat.setText(tukang.alamat_tukang)
         tvJamKerja.setText(tukang.jam_kerja)
+        tvKeahlian.setText("Keahlian : "+tukang.keahlian)
+        tvJasa.setText("Jasa : "+tukang.jasa)
+        tvMulaiOperasi.setText("Mulai Operasi Sejak "+tukang.mulai_operasi)
 
         if (mUserPref.getJenisUser().equals("admin")){
             lineSetting.visibility = View.VISIBLE
