@@ -29,6 +29,9 @@ import kotlinx.android.synthetic.main.activity_edit_tukang.*
 import kotlinx.android.synthetic.main.activity_edit_tukang.btnLokasi
 import kotlinx.android.synthetic.main.activity_edit_tukang.edAlamatTukang
 import kotlinx.android.synthetic.main.activity_edit_tukang.edJamKerja
+import kotlinx.android.synthetic.main.activity_edit_tukang.edJasa
+import kotlinx.android.synthetic.main.activity_edit_tukang.edKeahlian
+import kotlinx.android.synthetic.main.activity_edit_tukang.edMulaiOperasi
 import kotlinx.android.synthetic.main.activity_edit_tukang.edNamaTukang
 import kotlinx.android.synthetic.main.activity_edit_tukang.edPhoneTukang
 import kotlinx.android.synthetic.main.activity_edit_tukang.imageTukang
@@ -129,6 +132,9 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         var getAlamat = edAlamatTukang.text.toString()
         var getjamkerja = edJamKerja.text.toString()
         var getJmlOrder = edJmlOrder.text.toString()
+        var getMulaiOperasi = edMulaiOperasi.text.toString()
+        var getJasa = edJasa.text.toString()
+        var getKeahlian = edKeahlian.text.toString()
         var status = tukang.active
         if (switchTukang.isChecked){
             status = 1
@@ -147,7 +153,14 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
             showErrorMessage("Jam Kerja Belum diisi")
         }else if (getJmlOrder.equals("") || getJmlOrder.length == 0){
             showErrorMessage("Jumlah order belum diisi")
-        }else if (lat == 0.0){
+        }else if (getMulaiOperasi.equals("") || getMulaiOperasi.length == 0){
+            showErrorMessage("Mulai Operasi Belum diisi")
+        }else if (getJasa.equals("") || getJasa.length == 0){
+            showErrorMessage("Jasa Belum diisi")
+        }else if (getKeahlian.equals("") || getKeahlian.length == 0){
+            showErrorMessage("Keahlian Belum diisi")
+        }
+        else if (lat == 0.0){
             showErrorMessage("Lokasi belum dpilih")
         }
         else if (fileUri == null){
@@ -160,6 +173,9 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
             tukang.id_kategori = selectedIdKategori
             tukang.jml_order = getJmlOrder.toInt()
             tukang.active = status
+            tukang.keahlian = getKeahlian
+            tukang.jasa = getJasa
+            tukang.mulai_operasi = getMulaiOperasi
 
             updateDataOnly()
         }
@@ -174,6 +190,9 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
             tukang.id_kategori = selectedIdKategori
             tukang.jml_order = getJmlOrder.toInt()
             tukang.active = status
+            tukang.keahlian = getKeahlian
+            tukang.jasa = getJasa
+            tukang.mulai_operasi = getMulaiOperasi
             uploadFotoAndUpdate()
         }
     }
@@ -189,6 +208,9 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         tukangRef.document(tukang.id_tukang).update("lon",tukang.lon)
         tukangRef.document(tukang.id_tukang).update("id_kategori",tukang.id_kategori)
         tukangRef.document(tukang.id_tukang).update("jml_order",tukang.jml_order)
+        tukangRef.document(tukang.id_tukang).update("keahlian",tukang.keahlian)
+        tukangRef.document(tukang.id_tukang).update("jasa",tukang.jasa)
+        tukangRef.document(tukang.id_tukang).update("mulai_operasi",tukang.mulai_operasi)
         tukangRef.document(tukang.id_tukang).update("active",tukang.active).addOnCompleteListener { task ->
             dismissLoading()
             if (task.isSuccessful){
@@ -243,6 +265,9 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
                         tukangRef.document(tukang.id_tukang).update("lon",tukang.lon)
                         tukangRef.document(tukang.id_tukang).update("id_kategori",tukang.id_kategori)
                         tukangRef.document(tukang.id_tukang).update("jml_order",tukang.jml_order)
+                        tukangRef.document(tukang.id_tukang).update("keahlian",tukang.keahlian)
+                        tukangRef.document(tukang.id_tukang).update("jasa",tukang.jasa)
+                        tukangRef.document(tukang.id_tukang).update("mulai_operasi",tukang.mulai_operasi)
                         tukangRef.document(tukang.id_tukang).update("active",tukang.active).addOnCompleteListener { task ->
                             dismissLoading()
                             if (task.isSuccessful){
@@ -277,6 +302,9 @@ class EditTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         edAlamatTukang.setText(tukang.alamat_tukang)
         edJamKerja.setText(tukang.jam_kerja)
         edJmlOrder.setText(""+tukang.jml_order)
+        edKeahlian.setText(""+tukang.keahlian)
+        edJasa.setText(""+tukang.jasa)
+        edMulaiOperasi.setText(""+tukang.mulai_operasi)
 
         Glide.with(this)
             .load(tukang.foto_tukang)

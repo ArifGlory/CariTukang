@@ -150,6 +150,9 @@ class AddTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
         var getPhone = edPhoneTukang.text.toString()
         var getAlamat = edAlamatTukang.text.toString()
         var getjamkerja = edJamKerja.text.toString()
+        var getMulaiOperasi = edMulaiOperasi.text.toString()
+        var getJasa = edJasa.text.toString()
+        var getKeahlian = edKeahlian.text.toString()
 
 
         if (getName.equals("") || getName.length == 0){
@@ -160,7 +163,14 @@ class AddTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
             showErrorMessage("alamat Belum diisi")
         }else if (getjamkerja.equals("") || getjamkerja.length == 0){
             showErrorMessage("Jam Kerja Belum diisi")
-        }else if (lat == 0.0){
+        }else if (getMulaiOperasi.equals("") || getMulaiOperasi.length == 0){
+            showErrorMessage("Mulai Operasi Belum diisi")
+        }else if (getJasa.equals("") || getJasa.length == 0){
+            showErrorMessage("Jasa Belum diisi")
+        }else if (getKeahlian.equals("") || getKeahlian.length == 0){
+            showErrorMessage("Keahlian Belum diisi")
+        }
+        else if (lat == 0.0){
             showErrorMessage("Lokasi belum dpilih")
         }
         else if (fileUri == null){
@@ -179,7 +189,10 @@ class AddTukangActivity : BaseActivity(),PermissionHelper.PermissionListener {
                 "",
                 0,
                 0,
-                1
+                1,
+                getKeahlian,
+                getJasa,
+                getMulaiOperasi
             )
             uploadFoto()
         }
