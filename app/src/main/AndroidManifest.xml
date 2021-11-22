@@ -24,9 +24,17 @@
         android:theme="@style/Theme.CariTukang"
         tools:replace="android:icon">
         <activity
-            android:name=".activity.ResultActivity"
+            android:name=".activity.admin.ListLayananActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:exported="true" />
+        <activity
+            android:name=".activity.admin.AddLayananActivity"
+            android:exported="true"
+            />
+        <activity
+            android:name=".activity.ResultActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".activity.admin.EditTukangActivity"
             android:exported="true"

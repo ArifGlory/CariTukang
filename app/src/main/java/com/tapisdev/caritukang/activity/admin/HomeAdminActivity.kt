@@ -44,6 +44,10 @@ class HomeAdminActivity : BaseActivity() {
             startActivity(Intent(this, ListTukangActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.stay)
         }
+        lineLayananAdmin.setOnClickListener {
+            startActivity(Intent(this, ListLayananActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.stay)
+        }
 
 
         getDataTukang()
