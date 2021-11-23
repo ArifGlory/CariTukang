@@ -5,20 +5,25 @@
       <map>
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable-v24/orange_button.xml" value="0.2703125" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/bg_gradient_home_shadow_white_left.xml" value="0.2703125" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/button_background_red.xml" value="0.2703125" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/cursor.xml" value="0.2703125" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/edittext_border.xml" value="0.2703125" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.2703125" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2703125" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_add_kategori.xml" value="0.23550724637681159" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_add_layanan.xml" value="0.23550724637681159" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_add_layanan_to_tukang.xml" value="0.23550724637681159" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_add_tukang.xml" value="0.264" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_home_admin.xml" value="0.23550724637681159" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_home_pengguna.xml" value="0.17300724637681159" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_layanan_tukang.xml" value="0.23550724637681159" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_list_kategori.xml" value="0.23550724637681159" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_list_layanan.xml" value="0.23550724637681159" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_register_tukang.xml" value="0.23550724637681159" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/activity_show_tukang.xml" value="0.264" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/fragment_home.xml" value="0.17300724637681159" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/row_layanan.xml" value="0.23550724637681159" />
+        <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/row_layanan_to_tukang.xml" value="0.23550724637681159" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/layout/row_spinner_kategori.xml" value="0.23550724637681159" />
         <entry key="..\:/Arif Glory/AndroidProjects/CariTukang/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Project/AndroidProjects/CariTukang/app/src/main/res/drawable-v24/button_background_white.xml" value="0.3828125" />

@@ -20,5 +20,6 @@ data class Tukang(
     var active : Int = 0,
     var keahlian : String = "",
     var jasa : String = "",
-    var mulai_operasi : String = ""
+    var mulai_operasi : String = "",
+    var layanan_tukang : String = ""
 ) : Parcelable,java.io.Serializable

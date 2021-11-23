@@ -27,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.sdsmdg.tastytoast.TastyToast
 import com.tapisdev.caritukang.R
 import com.tapisdev.caritukang.activity.ResultActivity
+import com.tapisdev.caritukang.activity.admin.AddLayananToTukangActivity
 import com.tapisdev.caritukang.activity.admin.EditKategoriActivity
 import com.tapisdev.caritukang.activity.admin.ListKategoriActivity
 import com.tapisdev.caritukang.activity.admin.ListLayananActivity
@@ -34,7 +35,12 @@ import com.tapisdev.caritukang.model.UserPreference
 import com.tapisdev.mysteam.model.Kategori
 import com.tapisdev.mysteam.model.LayananKategori
 import com.tapisdev.mysteam.model.UserModel
+import kotlinx.android.synthetic.main.row_kategori.view.*
 import kotlinx.android.synthetic.main.row_layanan.view.*
+import kotlinx.android.synthetic.main.row_layanan.view.lineLayanan
+import kotlinx.android.synthetic.main.row_layanan.view.tvNamaKategori
+import kotlinx.android.synthetic.main.row_layanan.view.tvNamaLayanan
+import kotlinx.android.synthetic.main.row_layanan_to_tukang.view.*
 import java.io.Serializable
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -44,10 +50,10 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AdapterLayanan(private val list:ArrayList<LayananKategori>) : RecyclerView.Adapter<AdapterLayanan.Holder>(){
+class AdapterLayananToTukang(private val list:ArrayList<LayananKategori>) : RecyclerView.Adapter<AdapterLayananToTukang.Holder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        return Holder(LayoutInflater.from(parent.context).inflate(R.layout.row_layanan,parent,false))
+        return Holder(LayoutInflater.from(parent.context).inflate(R.layout.row_layanan_to_tukang,parent,false))
     }
 
     override fun getItemCount(): Int = list?.size
@@ -74,59 +80,25 @@ class AdapterLayanan(private val list:ArrayList<LayananKategori>) : RecyclerView
 
 
         holder.view.lineLayanan.setOnClickListener {
-            if (mUserPref.getJenisUser().equals("admin")){
 
-            }
         }
-        holder.view.lineLayanan.setOnLongClickListener {
-            Log.d("adapterIsi",""+list.get(position).toString())
 
-            if (mUserPref.getJenisUser().equals("admin")){
-                SweetAlertDialog(holder.view.lineLayanan.context, SweetAlertDialog.WARNING_TYPE)
-                    .setTitleText("Hapus Layanan")
-                    .setContentText("Anda Yakin Menghapus Layanan ini")
-                    .setConfirmText("Hapus")
-                    .setConfirmClickListener { sDialog ->
-                        sDialog.dismissWithAnimation()
+        if (list?.get(position).active == 1){
+            holder.view.cbLayanan.isChecked = true
+        }else{
+            holder.view.cbLayanan.isChecked = false
+        }
 
-                        pDialogLoading.show()
-
-                        layananRef.document(list?.get(position)?.id_layanan).update("active",0).addOnCompleteListener { task ->
-                            pDialogLoading.dismiss()
-                            if (task.isSuccessful){
-                                TastyToast.makeText(
-                                    holder.view.lineLayanan.context,
-                                    "Data layanan dihapus",
-                                    TastyToast.LENGTH_SHORT,
-                                    TastyToast.SUCCESS
-                                )
-                                if (holder.view.lineLayanan.context is ListLayananActivity){
-                                    (holder.view.lineLayanan.context as ListLayananActivity).refreshData()
-                                }
-                            }else{
-                                TastyToast.makeText(
-                                    holder.view.lineLayanan.context,
-                                    "Terjadi kesalahan, coba lagi nanti",
-                                    TastyToast.LENGTH_SHORT,
-                                    TastyToast.ERROR
-                                )
-                                Log.d("ubahKategori","err : "+task.exception)
-                            }
-                        }
-
-                    }
-                    .setCancelButton(
-                        "Batal"
-                    ) {
-                            sDialog -> sDialog.dismissWithAnimation()
-
-                    }
-                    .show()
+        holder.view.cbLayanan.setOnCheckedChangeListener { compoundButton, checked ->
+            if (checked){
+                if (holder.view.lineLayanan.context is AddLayananToTukangActivity){
+                    (holder.view.lineLayanan.context as AddLayananToTukangActivity).fillArrayLayanan(list?.get(position)?.id_layanan)
+                }
+            }else{
+                if (holder.view.lineLayanan.context is AddLayananToTukangActivity){
+                    (holder.view.lineLayanan.context as AddLayananToTukangActivity).removeFromArrayLayanan(list?.get(position)?.id_layanan)
+                }
             }
-
-
-
-            true
         }
 
 

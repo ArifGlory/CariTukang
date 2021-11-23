@@ -67,6 +67,11 @@ class ShowTukangActivity : BaseActivity(),PermissionHelper.PermissionListener,Ra
         btnRating.setOnClickListener {
             showDialog()
         }
+        btnLayanan.setOnClickListener {
+            val i = Intent(this,LayananTukangActivity::class.java)
+            i.putExtra("tukang",tukang as Serializable)
+            startActivity(i)
+        }
         btnHapusTukang.setOnClickListener {
             SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Hapus Tukang ini ?")
