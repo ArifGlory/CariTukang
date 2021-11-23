@@ -8,6 +8,12 @@ class SharedVariable {
     companion object {
         lateinit var user : UserModel
         var centerLatLon : LatLng = LatLng(0.0,0.0)
+        var arrLayananDipilih = ArrayList<String>()
 
+        open fun resetLayananDipilih(){
+            arrLayananDipilih.clear()
+        }
     }
+
+
 }

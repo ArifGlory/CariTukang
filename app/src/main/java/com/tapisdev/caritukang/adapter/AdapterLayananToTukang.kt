@@ -31,6 +31,7 @@ import com.tapisdev.caritukang.activity.admin.AddLayananToTukangActivity
 import com.tapisdev.caritukang.activity.admin.EditKategoriActivity
 import com.tapisdev.caritukang.activity.admin.ListKategoriActivity
 import com.tapisdev.caritukang.activity.admin.ListLayananActivity
+import com.tapisdev.caritukang.model.SharedVariable
 import com.tapisdev.caritukang.model.UserPreference
 import com.tapisdev.mysteam.model.Kategori
 import com.tapisdev.mysteam.model.LayananKategori
@@ -91,12 +92,21 @@ class AdapterLayananToTukang(private val list:ArrayList<LayananKategori>) : Recy
 
         holder.view.cbLayanan.setOnCheckedChangeListener { compoundButton, checked ->
             if (checked){
+                Log.d("layTukang","kontteks "+holder.view.cbLayanan.context)
                 if (holder.view.lineLayanan.context is AddLayananToTukangActivity){
                     (holder.view.lineLayanan.context as AddLayananToTukangActivity).fillArrayLayanan(list?.get(position)?.id_layanan)
+                }else{
+                    //di result activity
+                    SharedVariable.arrLayananDipilih.add(list?.get(position)?.id_layanan)
                 }
             }else{
+
                 if (holder.view.lineLayanan.context is AddLayananToTukangActivity){
                     (holder.view.lineLayanan.context as AddLayananToTukangActivity).removeFromArrayLayanan(list?.get(position)?.id_layanan)
+                }else{
+                    //di result activity
+                    SharedVariable.arrLayananDipilih.remove(list?.get(position)?.id_layanan)
+                    SharedVariable.arrLayananDipilih.sort()
                 }
             }
         }
