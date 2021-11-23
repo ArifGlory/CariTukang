@@ -31,7 +31,7 @@ class AddLayananToTukangActivity : BaseActivity() {
 
     lateinit var adapter: AdapterLayananToTukang
     var listLayanan = ArrayList<LayananKategori>()
-    var listLayananTukang = arrayOf<String>()
+    lateinit var listLayananTukang : List<String>
     var layananTukang = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +42,8 @@ class AddLayananToTukangActivity : BaseActivity() {
         tukang = i.getSerializableExtra("tukang") as Tukang
         if (tukang.layanan_tukang != null && !tukang.layanan_tukang.equals("")){
             layananTukang = tukang.layanan_tukang
-            listLayananTukang = layananTukang.split(",").toTypedArray()
+            listLayananTukang = layananTukang.split(",")
+            Log.d(TAG_LAYANAN_TUKANG," isi : "+listLayananTukang)
 
             showIsiArrayLayanan()
         }
@@ -67,7 +68,6 @@ class AddLayananToTukangActivity : BaseActivity() {
     }
 
     fun fillArrayLayanan(id_layanan : String){
-        listLayananTukang.plus(id_layanan)
         showInfoMessage("isi list layanan "+listLayananTukang.size)
 
         showIsiArrayLayanan()
@@ -79,7 +79,7 @@ class AddLayananToTukangActivity : BaseActivity() {
                 listLayananTukang.drop(i)
             }
         }
-        listLayananTukang.sortedArray()
+
         showInfoMessage("isi list layanan "+listLayananTukang.size)
 
         showIsiArrayLayanan()
@@ -89,8 +89,7 @@ class AddLayananToTukangActivity : BaseActivity() {
         val tsLong = System.currentTimeMillis() / 1000
 
         for (i in 0 until listLayananTukang.size){
-            TastyToast.makeText(this,"isi array ke $i"+listLayananTukang.get(i),TastyToast.LENGTH_SHORT,TastyToast.INFO)
-            Log.d(TAG_LAYANAN_TUKANG,"isi array ke $i "+listLayananTukang.get(i))
+            Log.d(TAG_LAYANAN_TUKANG,""+tsLong+" isi array ke $i "+listLayananTukang.get(i))
         }
     }
 
