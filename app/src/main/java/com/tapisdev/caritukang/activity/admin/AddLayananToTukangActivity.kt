@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sdsmdg.tastytoast.TastyToast
 import com.tapisdev.caritukang.R
+import com.tapisdev.caritukang.activity.ShowTukangActivity
 import com.tapisdev.caritukang.adapter.AdapterLayanan
 import com.tapisdev.caritukang.adapter.AdapterLayananToTukang
 import com.tapisdev.caritukang.base.BaseActivity
@@ -18,6 +19,7 @@ import com.tapisdev.mysteam.model.Tukang
 import kotlinx.android.synthetic.main.activity_add_layanan_to_tukang.*
 import kotlinx.android.synthetic.main.activity_add_layanan_to_tukang.animation_view_layanan
 import kotlinx.android.synthetic.main.activity_add_layanan_to_tukang.rvLayanan
+import java.io.Serializable
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
@@ -31,8 +33,7 @@ class AddLayananToTukangActivity : BaseActivity() {
 
     lateinit var adapter: AdapterLayananToTukang
     var listLayanan = ArrayList<LayananKategori>()
-    lateinit var listLayananTukang : List<String>
-    var layananTukang = ""
+    var arrLayanan = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +42,14 @@ class AddLayananToTukangActivity : BaseActivity() {
         i = intent
         tukang = i.getSerializableExtra("tukang") as Tukang
         if (tukang.layanan_tukang != null && !tukang.layanan_tukang.equals("")){
-            layananTukang = tukang.layanan_tukang
-            listLayananTukang = layananTukang.split(",")
+
+            var listLayananTukang : List<String>
+            listLayananTukang = tukang.layanan_tukang.split(",")
             Log.d(TAG_LAYANAN_TUKANG," isi : "+listLayananTukang)
+
+            for (i in 0 until listLayananTukang.size){
+                arrLayanan.add(listLayananTukang.get(i))
+            }
 
             showIsiArrayLayanan()
         }
@@ -59,28 +65,46 @@ class AddLayananToTukangActivity : BaseActivity() {
             onBackPressed()
         }
         btnSimpanLayananTukang.setOnClickListener {
-            showIsiArrayLayanan()
 
+            //convert the arraylist to string, and move the brackets
+            var layanan_tukang = arrLayanan.toString()
+            layanan_tukang = layanan_tukang.drop(1)
+            layanan_tukang = layanan_tukang.dropLast(1)
+            //layanan_tukang = layanan_tukang.trim()
+            layanan_tukang = layanan_tukang.filter { !it.isWhitespace() }
+            Log.d(TAG_LAYANAN_TUKANG," before save : "+layanan_tukang)
 
+            updateLayananTukang(layanan_tukang)
         }
 
         getDataLayanan()
     }
 
+    fun updateLayananTukang(layanan_tukang : String){
+        showLoading(this)
+        tukangRef.document(tukang.id_tukang).update("layanan_tukang",layanan_tukang).addOnCompleteListener { task ->
+            dismissLoading()
+            if (task.isSuccessful){
+                showSuccessMessage("Ubah Data Berhasil")
+                val i = Intent(this,ListTukangActivity::class.java)
+                i.putExtra("tukang",tukang as Serializable)
+                startActivity(i)
+                finish()
+            }else{
+                showErrorMessage("Terjadi kesalahan, coba lagi nanti")
+            }
+        }
+    }
+
     fun fillArrayLayanan(id_layanan : String){
-        showInfoMessage("isi list layanan "+listLayananTukang.size)
+        arrLayanan.add(id_layanan)
 
         showIsiArrayLayanan()
     }
 
     fun removeFromArrayLayanan(id_layanan: String){
-        for (i in 0 until listLayananTukang.size){
-            if (listLayananTukang.get(i).equals(id_layanan)){
-                listLayananTukang.drop(i)
-            }
-        }
-
-        showInfoMessage("isi list layanan "+listLayananTukang.size)
+        arrLayanan.remove(id_layanan)
+        arrLayanan.sort()
 
         showIsiArrayLayanan()
     }
@@ -88,9 +112,7 @@ class AddLayananToTukangActivity : BaseActivity() {
     fun showIsiArrayLayanan(){
         val tsLong = System.currentTimeMillis() / 1000
 
-        for (i in 0 until listLayananTukang.size){
-            Log.d(TAG_LAYANAN_TUKANG,""+tsLong+" isi array ke $i "+listLayananTukang.get(i))
-        }
+        Log.d(TAG_LAYANAN_TUKANG,""+tsLong+" isi arraylist "+arrLayanan.toString())
     }
 
     fun getDataLayanan(){
@@ -103,7 +125,7 @@ class AddLayananToTukangActivity : BaseActivity() {
                     //Log.d(TAG_GET_Sparepart, "Datanya : "+document.data)
                     var layanan : LayananKategori = document.toObject(LayananKategori::class.java)
                     layanan.id_layanan = document.id
-                    if (listLayananTukang.contains(layanan.id_layanan)){
+                    if (arrLayanan.contains(layanan.id_layanan)){
                         //buat checked checkbox nya
                         layanan.active = 1
                     }else{

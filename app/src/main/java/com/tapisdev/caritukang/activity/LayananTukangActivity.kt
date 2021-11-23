@@ -23,11 +23,12 @@ class LayananTukangActivity : BaseActivity() {
     lateinit var i : Intent
     lateinit var tukang : Tukang
     var TAG_GET_LAYANAN = "getLayanan"
+    var TAG_LAYANAN_TUKANG = "layaTukang"
 
     lateinit var adapter: AdapterLayanan
     var listLayanan = ArrayList<LayananKategori>()
     var listLayananTukang = arrayOf<String>()
-    var layananTukang = ""
+    var arrLayanan = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +37,15 @@ class LayananTukangActivity : BaseActivity() {
         i = intent
         tukang = i.getSerializableExtra("tukang") as Tukang
         if (tukang.layanan_tukang != null && !tukang.layanan_tukang.equals("")){
-            layananTukang = tukang.layanan_tukang
-            listLayananTukang = layananTukang.split(",").toTypedArray()
+
+            var listLayananTukang : List<String>
+            listLayananTukang = tukang.layanan_tukang.split(",")
+            Log.d(TAG_LAYANAN_TUKANG," isi : "+listLayananTukang)
+
+            for (i in 0 until listLayananTukang.size){
+                arrLayanan.add(listLayananTukang.get(i))
+            }
+
         }
 
         adapter = AdapterLayanan(listLayanan)
@@ -76,7 +84,7 @@ class LayananTukangActivity : BaseActivity() {
                     //Log.d(TAG_GET_Sparepart, "Datanya : "+document.data)
                     var layanan : LayananKategori = document.toObject(LayananKategori::class.java)
                     layanan.id_layanan = document.id
-                    if (listLayananTukang.contains(layanan.id_layanan)){
+                    if (arrLayanan.contains(layanan.id_layanan)){
                         listLayanan.add(layanan)
                     }
                 }
