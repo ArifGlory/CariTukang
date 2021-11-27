@@ -2,6 +2,7 @@ package com.tapisdev.caritukang.activity
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -27,6 +28,7 @@ import java.util.*
 import com.stepstone.apprating.AppRatingDialog
 import com.tapisdev.caritukang.adapter.AdapterKategori
 import com.tapisdev.mysteam.model.RatingTukang
+import java.net.URLEncoder
 
 
 class ShowTukangActivity : BaseActivity(),PermissionHelper.PermissionListener,RatingDialogListener {
@@ -57,7 +59,38 @@ class ShowTukangActivity : BaseActivity(),PermissionHelper.PermissionListener,Ra
             startActivity(i)
         }
         btnHubungi.setOnClickListener {
-            requestPermissionCall()
+            var msg = "Halo, "+ tukang.nama_tukang +" saya ingin bertanya.."
+            var phone = tukang.phone_tukang
+            var firstChar = phone?.take(1) as String
+            var newPhone = ""
+
+            if (firstChar.equals("0")){
+                newPhone = phone.substring(1,phone.length)
+                newPhone = "62"+newPhone
+            } else{
+                newPhone = phone
+            }
+            Log.d("tag_phone",""+newPhone)
+
+            try {
+                val packageManager: PackageManager = this.getPackageManager()
+                val i = Intent(Intent.ACTION_VIEW)
+                val url =
+                    "https://api.whatsapp.com/send?phone=" + newPhone + "&text=" + URLEncoder.encode(
+                        msg,
+                        "UTF-8"
+                    )
+                i.setPackage("com.whatsapp")
+                i.data = Uri.parse(url)
+                if (i.resolveActivity(packageManager) != null) {
+                    startActivity(i)
+                } else {
+                    showErrorMessage("nomor WA error")
+                }
+            } catch (e: Exception) {
+                Log.e("ERROR WHATSAPP", e.toString())
+                showErrorMessage("Terjadi kesalahan, coba lagi nanti")
+            }
         }
         btnEditTukang.setOnClickListener {
             val i = Intent(this,EditTukangActivity::class.java)
