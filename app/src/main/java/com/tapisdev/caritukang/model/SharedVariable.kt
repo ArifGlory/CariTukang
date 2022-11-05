@@ -9,6 +9,7 @@ class SharedVariable {
         lateinit var user : UserModel
         var centerLatLon : LatLng = LatLng(0.0,0.0)
         var arrLayananDipilih = ArrayList<String>()
+        var isFilterJarakTerdekat = false
 
         open fun resetLayananDipilih(){
             arrLayananDipilih.clear()

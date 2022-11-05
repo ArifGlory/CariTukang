@@ -1,7 +1,11 @@
 package com.tapisdev.caritukang.activity
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
+import android.content.IntentSender
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +14,11 @@ import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.Query
 import com.tapisdev.caritukang.R
 import com.tapisdev.caritukang.adapter.AdapterLayananToTukang
@@ -17,23 +26,35 @@ import com.tapisdev.caritukang.adapter.AdapterTukang
 import com.tapisdev.caritukang.base.BaseActivity
 import com.tapisdev.caritukang.model.SharedVariable
 import com.tapisdev.caritukang.model.UserPreference
+import com.tapisdev.caritukang.util.PermissionHelper
 import com.tapisdev.mysteam.model.LayananKategori
 import com.tapisdev.mysteam.model.Tukang
+import io.nlopez.smartlocation.OnLocationUpdatedListener
+import io.nlopez.smartlocation.SmartLocation
 import kotlinx.android.synthetic.main.activity_list_layanan.*
 import kotlinx.android.synthetic.main.activity_result.*
+import java.text.DecimalFormat
+import kotlin.math.round
 
-class ResultActivity : BaseActivity() {
+class ResultActivity : BaseActivity(),PermissionHelper.PermissionListener {
 
     var TAG_GET_TUKANG = "getTukang"
+    var TAG_LOKASI = "lokasi"
     var type = ""
     var keyword = ""
     var id_kategori = ""
 
     lateinit var i : Intent
+    lateinit var originLocation: Location
+    lateinit var destinationLocation: Location
+    lateinit var  permissionHelper : PermissionHelper
+    var lokasiUser : LatLng? = null
+    val df = DecimalFormat("#.##")
 
     lateinit var adapter: AdapterTukang
     var listTukang = ArrayList<Tukang>()
 
+    var LOCATION_SETTINGS_REQUEST = 999
     var TAG_GET_LAYANAN = "getLayanan"
     var TAG_LAYANAN_TUKANG = "layananDipilih"
     lateinit var adapterLayananToTukang: AdapterLayananToTukang
@@ -55,6 +76,9 @@ class ResultActivity : BaseActivity() {
             id_kategori = i.getStringExtra("id_kategori").toString()
             getDataTukangByKategori()
         }
+
+        permissionHelper = PermissionHelper(this)
+        permissionHelper.setPermissionListener(this)
 
         adapter = AdapterTukang(listTukang)
         rvResult.setHasFixedSize(true)
@@ -93,6 +117,63 @@ class ResultActivity : BaseActivity() {
 
             dialog.show()
         }
+
+        permissionLocation()
+       // setOriginAndDestinationLocation()
+    }
+
+    fun setOriginLocation(){
+        destinationLocation = Location("destination")
+        originLocation = Location("origin")
+
+        originLocation.latitude = lokasiUser?.latitude!!
+        originLocation.longitude = lokasiUser?.longitude!!
+
+    }
+
+    fun startLocationService(){
+        Log.d(TAG_LOKASI," location service aktif ")
+        SmartLocation.with(this).location().start(OnLocationUpdatedListener {
+            lokasiUser = LatLng(it.latitude,it.longitude)
+            Log.d(TAG_LOKASI," lokasi user : "+lokasiUser)
+
+            setOriginLocation()
+        })
+    }
+
+    fun calculateDistance(lokasiTujuan : LatLng): Double? {
+        destinationLocation = Location("destination")
+        destinationLocation.latitude = lokasiTujuan.latitude
+        destinationLocation.longitude = lokasiTujuan.longitude
+
+        //calculate the distance
+        val distanceInMeter = originLocation.distanceTo(destinationLocation)
+        Log.d(TAG_LOKASI,"distance meter "+distanceInMeter)
+        val distanceKM = distanceInMeter / 1000
+        val roundedDistance = df.format(distanceKM).toDouble()
+
+        return roundedDistance
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterByJarakterdekat(){
+        for (i in 0 until  listTukang.size){
+            val tukang = listTukang.get(i)
+            val lokasiTujuan = LatLng(tukang.lat.toDouble(),tukang.lon.toDouble())
+            val jarak = calculateDistance(lokasiTujuan)
+            tukang.nama_tukang = tukang.nama_tukang+ " ("+jarak+" Km)"
+            tukang.jarak = jarak
+            listTukang.set(i,tukang)
+        }
+        //sort by jarak
+        val sortedList = listTukang.sortedWith(compareBy {
+            it.jarak
+        })
+        listTukang.clear()
+        listTukang.addAll(sortedList)
+
+        animation_view_result.visibility = View.INVISIBLE
+        adapter.notifyDataSetChanged()
     }
 
     fun showIsiArrayLayanan(){
@@ -101,6 +182,7 @@ class ResultActivity : BaseActivity() {
         Log.d(TAG_LAYANAN_TUKANG,""+tsLong+" isi arraylist "+SharedVariable.arrLayananDipilih.toString())
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun getDataLayanan(animation_view_layanan: LottieAnimationView) {
 
         layananRef.whereEqualTo("active",1)
@@ -133,6 +215,7 @@ class ResultActivity : BaseActivity() {
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun getDataTukangByLayanan(){
         listTukang.clear()
         adapter.notifyDataSetChanged()
@@ -144,7 +227,7 @@ class ResultActivity : BaseActivity() {
                 //Log.d(TAG_GET_Sparepart," datanya "+result.documents)
                 for (document in result){
                     //Log.d(TAG_GET_Sparepart, "Datanya : "+document.data)
-                    var tukang : Tukang = document.toObject(Tukang::class.java)
+                    val tukang : Tukang = document.toObject(Tukang::class.java)
                     tukang.id_tukang = document.id
 
                     var listLayananTukang : List<String>
@@ -166,9 +249,15 @@ class ResultActivity : BaseActivity() {
 
                     animation_view_result.visibility = View.VISIBLE
                 }else{
-                    animation_view_result.visibility = View.INVISIBLE
+                    //cek apakah ada filter jarak
+                    if (SharedVariable.isFilterJarakTerdekat){
+                        //list yang di dapat tadi, diolah dan dihitung lagi jaraknya
+                        filterByJarakterdekat()
+                    }else{
+                        animation_view_result.visibility = View.INVISIBLE
+                        adapter.notifyDataSetChanged()
+                    }
                 }
-                adapter.notifyDataSetChanged()
 
             }.addOnFailureListener { exception ->
                 showErrorMessage("terjadi kesalahan : "+exception.message)
@@ -216,6 +305,7 @@ class ResultActivity : BaseActivity() {
             }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun getDataTukangByKategori(){
         Log.d("resAct","id kategori "+id_kategori)
 
@@ -253,5 +343,58 @@ class ResultActivity : BaseActivity() {
                 showErrorMessage("terjadi kesalahan : "+exception.message)
                 Log.d(TAG_GET_TUKANG,"err : "+exception.message)
             }
+    }
+
+    private fun permissionLocation() {
+        val listPermissions: MutableList<String> = java.util.ArrayList()
+        listPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        listPermissions.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        permissionHelper.checkAndRequestPermissions(listPermissions)
+    }
+
+    override fun onPermissionCheckDone() {
+        val checkLokasi = SmartLocation.with(this).location().state().isGpsAvailable
+        if (checkLokasi == false){
+            showEnableLocationSetting()
+        }else{
+            startLocationService()
+        }
+    }
+
+    fun showEnableLocationSetting() {
+        this.let {
+            val locationRequest = LocationRequest.create()
+            locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+            val builder = LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest)
+
+            val task = LocationServices.getSettingsClient(it)
+                .checkLocationSettings(builder.build())
+
+            task.addOnSuccessListener { response ->
+                val states = response.locationSettingsStates
+                if (states != null) {
+                    if (states.isLocationPresent) {
+                        //Do something
+                        Log.d(TAG_LOKASI," lokasi diaktifkan")
+
+                        showSuccessMessage("lokasi diaktifkan")
+                    }else if (!states.isLocationPresent){
+                        showWarningMessage("lokasi tidak didapatkan")
+                    }
+                }
+            }
+            task.addOnFailureListener { e ->
+                if (e is ResolvableApiException) {
+                    try {
+                        // Handle result in onActivityResult()
+                        Log.d(TAG_LOKASI," gagal "+e.toString())
+                        e.startResolutionForResult(it,
+                            LOCATION_SETTINGS_REQUEST)
+                    } catch (sendEx: IntentSender.SendIntentException) { }
+                }
+            }
+        }
     }
 }

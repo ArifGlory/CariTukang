@@ -1,5 +1,6 @@
 package com.tapisdev.caritukang.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -57,6 +58,7 @@ class AdapterLayanan(private val list:ArrayList<LayananKategori>) : RecyclerView
     lateinit var pDialogLoading : SweetAlertDialog
     val layananRef = myDB.collection("layanan")
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: Holder, position: Int) {
         mUserPref = UserPreference(holder.view.lineLayanan.context)
@@ -68,9 +70,12 @@ class AdapterLayanan(private val list:ArrayList<LayananKategori>) : RecyclerView
         pDialogLoading.setTitleText("Loading..")
         pDialogLoading.setCancelable(false)
 
-
-        holder.view.tvNamaKategori.text = list?.get(position)?.nama_kategori
-        holder.view.tvNamaLayanan.text = list?.get(position)?.nama_layanan
+        if (list.get(position).nama_layanan.lowercase().equals("jarak terdekat")){
+            holder.view.tvNamaKategori.text = "Semua Kategori"
+        }else{
+            holder.view.tvNamaKategori.text = list.get(position).nama_kategori
+        }
+        holder.view.tvNamaLayanan.text = list.get(position).nama_layanan
 
 
         holder.view.lineLayanan.setOnClickListener {

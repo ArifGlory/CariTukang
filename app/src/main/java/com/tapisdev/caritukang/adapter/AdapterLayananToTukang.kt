@@ -1,5 +1,6 @@
 package com.tapisdev.caritukang.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -64,6 +65,7 @@ class AdapterLayananToTukang(private val list:ArrayList<LayananKategori>) : Recy
     lateinit var pDialogLoading : SweetAlertDialog
     val layananRef = myDB.collection("layanan")
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: Holder, position: Int) {
         mUserPref = UserPreference(holder.view.lineLayanan.context)
@@ -76,7 +78,12 @@ class AdapterLayananToTukang(private val list:ArrayList<LayananKategori>) : Recy
         pDialogLoading.setCancelable(false)
 
 
-        holder.view.tvNamaKategori.text = list?.get(position)?.nama_kategori
+        if (list.get(position).nama_layanan.lowercase().equals("jarak terdekat")){
+            holder.view.tvNamaKategori.text = "Semua Kategori"
+        }else{
+            holder.view.tvNamaKategori.text = list.get(position).nama_kategori
+        }
+        //holder.view.tvNamaKategori.text = list?.get(position)?.nama_kategori
         holder.view.tvNamaLayanan.text = list?.get(position)?.nama_layanan
 
 
@@ -97,16 +104,25 @@ class AdapterLayananToTukang(private val list:ArrayList<LayananKategori>) : Recy
                     (holder.view.lineLayanan.context as AddLayananToTukangActivity).fillArrayLayanan(list?.get(position)?.id_layanan)
                 }else{
                     //di result activity
-                    SharedVariable.arrLayananDipilih.add(list?.get(position)?.id_layanan)
+                    SharedVariable.arrLayananDipilih.add(list.get(position).id_layanan)
+
+                    if (list.get(position).nama_layanan.equals("Jarak Terdekat")){
+                        SharedVariable.isFilterJarakTerdekat = true
+                    }
                 }
             }else{
 
                 if (holder.view.lineLayanan.context is AddLayananToTukangActivity){
                     (holder.view.lineLayanan.context as AddLayananToTukangActivity).removeFromArrayLayanan(list?.get(position)?.id_layanan)
                 }else{
+                    if (list.get(position).nama_layanan.equals("Jarak Terdekat")){
+                        SharedVariable.isFilterJarakTerdekat = false
+                    }
+
                     //di result activity
-                    SharedVariable.arrLayananDipilih.remove(list?.get(position)?.id_layanan)
+                    SharedVariable.arrLayananDipilih.remove(list.get(position).id_layanan)
                     SharedVariable.arrLayananDipilih.sort()
+
                 }
             }
         }
