@@ -13,6 +13,7 @@ class SharedVariable {
 
         open fun resetLayananDipilih(){
             arrLayananDipilih.clear()
+            isFilterJarakTerdekat = false
         }
     }
 

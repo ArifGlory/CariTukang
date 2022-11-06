@@ -110,7 +110,14 @@ class ResultActivity : BaseActivity(),PermissionHelper.PermissionListener {
                 if (SharedVariable.arrLayananDipilih.size == 0){
                     showErrorMessage("anda belum memilih layanan")
                 }else{
-                    getDataTukangByLayanan()
+                    Log.d(TAG_LAYANAN_TUKANG," yang dipilih : "+SharedVariable.arrLayananDipilih.get(0))
+                    if (SharedVariable.arrLayananDipilih.size == 1 && SharedVariable.arrLayananDipilih.get(0).equals("nZ0mBATLxgPxyBs4nq8N")){
+                        //id jarak terdekat
+                        Log.d(TAG_LAYANAN_TUKANG," cuma ada jarak terdekat aja")
+                        filterByJarakterdekat()
+                    }else{
+                        getDataTukangByLayanan()
+                    }
                     dialog.dismiss()
                 }
             }

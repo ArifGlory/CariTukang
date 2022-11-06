@@ -64,6 +64,7 @@ class AdapterLayananToTukang(private val list:ArrayList<LayananKategori>) : Recy
     val myDB = FirebaseFirestore.getInstance()
     lateinit var pDialogLoading : SweetAlertDialog
     val layananRef = myDB.collection("layanan")
+    var TAG_LAYANAN = "layselected"
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -105,6 +106,7 @@ class AdapterLayananToTukang(private val list:ArrayList<LayananKategori>) : Recy
                 }else{
                     //di result activity
                     SharedVariable.arrLayananDipilih.add(list.get(position).id_layanan)
+                    Log.d(TAG_LAYANAN," yang dipilih : "+list.get(position).nama_layanan)
 
                     if (list.get(position).nama_layanan.equals("Jarak Terdekat")){
                         SharedVariable.isFilterJarakTerdekat = true
