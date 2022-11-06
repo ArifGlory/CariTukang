@@ -148,7 +148,7 @@ class ResultActivity : BaseActivity(),PermissionHelper.PermissionListener {
         })
     }
 
-    fun calculateDistance(lokasiTujuan : LatLng): Double? {
+    fun calculateDistance(lokasiTujuan : LatLng): Double {
         destinationLocation = Location("destination")
         destinationLocation.latitude = lokasiTujuan.latitude
         destinationLocation.longitude = lokasiTujuan.longitude
@@ -157,9 +157,19 @@ class ResultActivity : BaseActivity(),PermissionHelper.PermissionListener {
         val distanceInMeter = originLocation.distanceTo(destinationLocation)
         Log.d(TAG_LOKASI,"distance meter "+distanceInMeter)
         val distanceKM = distanceInMeter / 1000
-        val roundedDistance = df.format(distanceKM).toDouble()
+        var jarakKm = distanceKM.toString()
+        if (jarakKm.contains(",")){
+            jarakKm = jarakKm.replace(",",".")
+        }
+        Log.d(TAG_LOKASI," jarak : "+jarakKm)
+        var roundedDistance = df.format(jarakKm.toFloat())
+        if (roundedDistance.contains(",")){
+            roundedDistance = roundedDistance.replace(",",".")
+        }
+        val hasil = roundedDistance.toDouble()
 
-        return roundedDistance
+
+        return hasil
     }
 
     @SuppressLint("NotifyDataSetChanged")
